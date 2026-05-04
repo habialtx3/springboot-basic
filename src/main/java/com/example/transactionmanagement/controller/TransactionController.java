@@ -25,8 +25,8 @@ public class TransactionController {
     }
 
     @GetMapping("/transactions/{reference}")
-    public String getOneTransaction() {
-        return "Hello from transaction";
+    public TransactionEntity getOneTransaction(@PathVariable String reference) {
+        return transactionService.getOneTransaction(reference);
     }
 
     @PostMapping("/transactions")

@@ -5,6 +5,7 @@ import com.example.transactionmanagement.dto.PaginationResponse;
 import com.example.transactionmanagement.entity.TransactionEntity;
 import com.example.transactionmanagement.repository.TransactionRepository;
 import com.example.transactionmanagement.service.TransactionServiceInterface;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +28,8 @@ public class TransactionServiceImpl implements TransactionServiceInterface{
     }
 
     @Override
-    public TransactionEntity getOneTransaction(String references) {
-        return null;
+    public TransactionEntity getOneTransaction(String reference) {
+        return transactionRepository.findByReference(reference).orElseThrow(()-> new EntityNotFoundException(("Transaction is not found")));
     }
 
     @Override
