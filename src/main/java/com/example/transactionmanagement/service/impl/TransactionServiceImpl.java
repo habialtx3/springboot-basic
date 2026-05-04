@@ -1,5 +1,6 @@
 package com.example.transactionmanagement.service.impl;
 
+import com.example.transactionmanagement.dto.CreateTransactionPayload;
 import com.example.transactionmanagement.dto.PaginationResponse;
 import com.example.transactionmanagement.entity.TransactionEntity;
 import com.example.transactionmanagement.repository.TransactionRepository;
@@ -36,8 +37,13 @@ public class TransactionServiceImpl implements TransactionServiceInterface{
     }
 
     @Override
-    public TransactionEntity createTransaction(Pageable pageable) {
-        return null;
+    public TransactionEntity createTransaction(CreateTransactionPayload payload) {
+        TransactionEntity transactionEntity = TransactionEntity.builder()
+                .status("success")
+                .amount((payload.getAmount()))
+                .reference(payload.getReference())
+                .build();
+        return transactionRepository.save(transactionEntity);
     }
 
     @Override

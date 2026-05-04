@@ -1,10 +1,7 @@
 package com.example.transactionmanagement.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -12,9 +9,10 @@ import java.util.UUID;
 @Entity
 @Table(name = "transactions")
 @Builder
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 
 public class TransactionEntity {
 
