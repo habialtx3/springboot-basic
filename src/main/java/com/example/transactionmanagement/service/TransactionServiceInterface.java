@@ -5,7 +5,7 @@ import com.example.transactionmanagement.entity.TransactionEntity;
 import org.springframework.data.domain.Pageable;
 
 public interface TransactionServiceInterface {
-    PaginationResponse<?> getAllTransaction (Pageable pageable);
+    PaginationResponse<TransactionEntity> getAllTransaction (Pageable pageable);
     TransactionEntity getOneTransaction (String references);
     TransactionEntity updateTransaction (String idm, Object payload);
     TransactionEntity createTransaction (Pageable pageable);

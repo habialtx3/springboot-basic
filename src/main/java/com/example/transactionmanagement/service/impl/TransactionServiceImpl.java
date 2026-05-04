@@ -2,16 +2,27 @@ package com.example.transactionmanagement.service.impl;
 
 import com.example.transactionmanagement.dto.PaginationResponse;
 import com.example.transactionmanagement.entity.TransactionEntity;
+import com.example.transactionmanagement.repository.TransactionRepository;
 import com.example.transactionmanagement.service.TransactionServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionServiceImpl implements TransactionServiceInterface{
 
+    @Autowired
+    private TransactionRepository transactionRepository;
+
     @Override
-    public PaginationResponse<?> getAllTransaction(Pageable pageable) {
-        return null;
+    public PaginationResponse<TransactionEntity> getAllTransaction(Pageable pageable) {
+        Page<TransactionEntity> transactionEntities = transactionRepository.getAllTransaction(pageable);
+        return new PaginationResponse<>(
+                transactionEntities.getNumberOfElements(),
+                transactionEntities.getTotalElements(),
+                transactionEntities.getContent()
+        );
     }
 
     @Override
