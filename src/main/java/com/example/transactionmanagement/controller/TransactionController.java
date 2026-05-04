@@ -4,6 +4,7 @@ import com.example.transactionmanagement.dto.CreateTransactionPayload;
 import com.example.transactionmanagement.dto.PaginationResponse;
 import com.example.transactionmanagement.entity.TransactionEntity;
 import com.example.transactionmanagement.service.TransactionServiceInterface;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -29,7 +30,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public TransactionEntity createTransaction(@RequestBody CreateTransactionPayload payload) {
+    public TransactionEntity createTransaction(@Valid @RequestBody CreateTransactionPayload payload) {
         return transactionService.createTransaction(payload);
     }
 
