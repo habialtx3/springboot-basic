@@ -24,7 +24,7 @@ public class TransactionEntity {
     private UUID id;
 
     @Column(nullable = false,updatable = false, length = 50)
-    private String references;
+    private String reference;
 
     @Column(nullable = false)
     private BigDecimal amount;
