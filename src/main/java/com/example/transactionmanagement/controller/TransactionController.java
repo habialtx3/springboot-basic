@@ -1,5 +1,6 @@
 package com.example.transactionmanagement.controller;
 
+import com.example.transactionmanagement.dto.CreateTransactionPayload;
 import com.example.transactionmanagement.dto.PaginationResponse;
 import com.example.transactionmanagement.entity.TransactionEntity;
 import com.example.transactionmanagement.service.TransactionServiceInterface;
@@ -18,8 +19,8 @@ public class TransactionController {
 
 
     @GetMapping("/transactions")
-    public PaginationResponse<TransactionEntity> getAllTransaction(@PageableDefault(size = 10, sort = "created_at")Pageable pageable) {
-        return  transactionService.getAllTransaction(pageable);
+    public PaginationResponse<TransactionEntity> getAllTransaction(@PageableDefault(size = 10, sort = "created_at") Pageable pageable) {
+        return transactionService.getAllTransaction(pageable);
     }
 
     @GetMapping("/transactions/{reference}")
@@ -28,8 +29,8 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public String createTransaction() {
-        return "Hello from transaction";
+    public TransactionEntity createTransaction(@RequestBody CreateTransactionPayload payload) {
+        return transactionService.createTransaction(payload);
     }
 
     @PutMapping("/transactions/{id}")
