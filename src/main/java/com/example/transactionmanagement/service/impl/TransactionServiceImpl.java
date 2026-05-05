@@ -58,6 +58,8 @@ public class TransactionServiceImpl implements TransactionServiceInterface{
 
     @Override
     public void deleteTransaction(String id) {
-
+        Optional<TransactionEntity> transaction = transactionRepository.findById((UUID.fromString(id)));
+        if(transaction.isEmpty()) throw new EntityNotFoundException("Transaction not found");
+        transactionRepository.deleteById(UUID.fromString(id));
     }
 }
