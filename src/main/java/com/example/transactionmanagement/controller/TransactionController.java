@@ -45,9 +45,10 @@ public class TransactionController {
         return ResponseUtils.success(transactionService.updateTransaction(id,payload), "Successfully updated payload");
     }
 
-    @DeleteMapping("/transactions")
-    public String deleteTransaction() {
-        return "Hello from transaction";
+    @DeleteMapping("/transactions/{id}")
+    public ResponseEntity<BaseResponse> deleteTransaction(@PathVariable("id") String id){
+        transactionService.deleteTransaction(id);
+        return ResponseUtils.successNoContent("Sucess Deleted Transaction");
     }
 
 }

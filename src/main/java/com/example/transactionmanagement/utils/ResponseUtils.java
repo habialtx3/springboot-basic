@@ -10,4 +10,10 @@ public class ResponseUtils {
         );
     }
 
+    public static ResponseEntity<BaseResponse> successNoContent (String message) {
+        return ResponseEntity.ok(
+                BaseResponse.builder().code("SUCESS_NO_CONTENT").messages(message).build()
+        );
+    }
+
 }
