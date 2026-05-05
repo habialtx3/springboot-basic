@@ -2,6 +2,7 @@ package com.example.transactionmanagement.controller;
 
 import com.example.transactionmanagement.dto.CreateTransactionPayload;
 import com.example.transactionmanagement.dto.PaginationResponse;
+import com.example.transactionmanagement.dto.UpdateTransactionPayload;
 import com.example.transactionmanagement.entity.TransactionEntity;
 import com.example.transactionmanagement.service.TransactionServiceInterface;
 import com.example.transactionmanagement.utils.BaseResponse;
@@ -40,8 +41,8 @@ public class TransactionController {
     }
 
     @PutMapping("/transactions/{id}")
-    public String updateTransaction() {
-        return "Hello from transaction";
+    public ResponseEntity<BaseResponse<TransactionEntity>> updateTransaction(@PathVariable("id") String id, @Valid @RequestBody UpdateTransactionPayload payload) {
+        return ResponseUtils.success(transactionService.updateTransaction(id,payload), "Successfully updated payload");
     }
 
     @DeleteMapping("/transactions")

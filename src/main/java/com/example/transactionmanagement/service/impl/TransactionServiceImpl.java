@@ -2,6 +2,7 @@ package com.example.transactionmanagement.service.impl;
 
 import com.example.transactionmanagement.dto.CreateTransactionPayload;
 import com.example.transactionmanagement.dto.PaginationResponse;
+import com.example.transactionmanagement.dto.UpdateTransactionPayload;
 import com.example.transactionmanagement.entity.TransactionEntity;
 import com.example.transactionmanagement.repository.TransactionRepository;
 import com.example.transactionmanagement.service.TransactionServiceInterface;
@@ -10,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class TransactionServiceImpl implements TransactionServiceInterface{
@@ -33,8 +37,13 @@ public class TransactionServiceImpl implements TransactionServiceInterface{
     }
 
     @Override
-    public TransactionEntity updateTransaction(String idm, Object payload) {
-        return null;
+    public TransactionEntity updateTransaction(String id, UpdateTransactionPayload payload)
+    {
+        Optional<TransactionEntity> transaction = transactionRepository.findById(UUID.fromString(id));
+        if(transaction.isEmpty()) throw  new EntityNotFoundException("Transaction not found");
+        TransactionEntity trx = transaction.get();
+        trx.setAmount(payload.getAmount());
+        return transactionRepository.save(trx);
     }
 
     @Override
